@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Students</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <h2>Student Portal</h2>
+
+        <nav>
+
+            <a th:href="@{/admin/dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/admin/students}" class="active">
+                Students
+            </a>
+
+            <a th:href="@{/admin/faculty}">
+                Faculty
+            </a>
+
+            <a th:href="@{/admin/subjects}">
+                Subjects
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit">
+                Logout
+            </button>
+
+        </form>
+
+    </aside>
+
+    <main class="content">
+
+        <h1>Manage Students</h1>
+
+        <p class="welcome">
+            Add and view registered students
+        </p>
+
+        <div th:if="${param.saved}" class="success">
+            Student added successfully.
+        </div>
+
+        <section class="form-card">
+
+            <h2>Add Student</h2>
+
+            <form th:action="@{/admin/students}" method="post">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Username</label>
+
+                        <input
+                                type="text"
+                                name="username"
+                                placeholder="Enter username"
+                                required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Password</label>
+
+                        <input
+                                type="password"
+                                name="password"
+                                placeholder="Enter password"
+                                required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Full Name</label>
+
+                        <input
+                                type="text"
+                                name="fullName"
+                                placeholder="Enter full name"
+                                required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Email</label>
+
+                        <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Roll Number</label>
+
+                        <input
+                                type="text"
+                                name="rollNumber"
+                                placeholder="Enter roll number"
+                                required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Semester</label>
+
+                        <input
+                                type="number"
+                                name="semester"
+                                min="1"
+                                max="8"
+                                placeholder="Enter semester"
+                                required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Department</label>
+
+                        <select name="departmentId" required>
+
+                            <option value="">
+                                Select Department
+                            </option>
+
+                            <option
+                                    th:each="department : ${departments}"
+                                    th:value="${department.id}"
+                                    th:text="${department.name}">
+
+                                Department
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="primary-button">
+                    Add Student
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="info-card">
+
+            <h2>Student List</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Roll Number</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Semester</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="student : ${students}">
+
+                        <td th:text="${student.rollNumber}">
+                            -
+                        </td>
+
+                        <td th:text="${student.fullName}">
+                            -
+                        </td>
+
+                        <td th:text="${student.username}">
+                            -
+                        </td>
+
+                        <td th:text="${student.email}">
+                            -
+                        </td>
+
+                        <td th:text="${student.department.name}">
+                            -
+                        </td>
+
+                        <td th:text="${student.semester}">
+                            -
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="no-data" th:if="${#lists.isEmpty(students)}">
+                No students available.
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

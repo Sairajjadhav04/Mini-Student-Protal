@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Subjects</title>
+
+  <link rel="stylesheet" th:href="@{/css/subjects.css}">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+  <aside class="sidebar">
+
+    <h2>Student Portal</h2>
+
+    <nav>
+
+      <a th:href="@{/student/dashboard}">
+        Dashboard
+      </a>
+
+      <a th:href="@{/student/profile}">
+        Profile
+      </a>
+
+      <a th:href="@{/student/subjects}" class="active">
+        Subjects
+      </a>
+
+      <a th:href="@{/student/attendance}">
+        Attendance
+      </a>
+
+      <a th:href="@{/student/results}">
+        Results
+      </a>
+
+      <a th:href="@{/student/assignments}">
+        Assignments
+      </a>
+
+    </nav>
+
+    <form th:action="@{/logout}" method="post">
+
+      <button type="submit">
+        Logout
+      </button>
+
+    </form>
+
+  </aside>
+
+  <main class="content">
+
+    <h1>My Subjects</h1>
+
+    <p class="subtitle">
+      Subjects assigned to your department and semester
+    </p>
+
+    <div class="student-info">
+
+      <div>
+
+        <span>Department</span>
+
+        <strong th:text="${student.department.name}">
+          -
+        </strong>
+
+      </div>
+
+      <div>
+
+        <span>Semester</span>
+
+        <strong th:text="${student.semester}">
+          -
+        </strong>
+
+      </div>
+
+    </div>
+
+    <section class="subjects-section">
+
+      <h2>Subject List</h2>
+
+      <div class="subject-list">
+
+        <div
+                class="subject-card"
+                th:each="subject : ${subjects}">
+
+          <div
+                  class="subject-code"
+                  th:text="${subject.code}">
+            CODE
+          </div>
+
+          <h3 th:text="${subject.name}">
+            Subject Name
+          </h3>
+
+          <p>
+            Semester:
+            <span th:text="${subject.semester}">
+                            -
+                        </span>
+          </p>
+
+          <p>
+            Department:
+            <span th:text="${subject.department.name}">
+                            -
+                        </span>
+          </p>
+
+        </div>
+
+      </div>
+
+      <div
+              class="no-subjects"
+              th:if="${#lists.isEmpty(subjects)}">
+
+        No subjects are currently available.
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+
+</html>

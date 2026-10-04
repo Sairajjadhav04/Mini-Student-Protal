@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance</title>
+
+    <link rel="stylesheet" th:href="@{/css/attendance.css}">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <h2>Student Portal</h2>
+
+        <nav>
+
+            <a th:href="@{/student/dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/student/profile}">
+                Profile
+            </a>
+
+            <a th:href="@{/student/subjects}">
+                Subjects
+            </a>
+
+            <a th:href="@{/student/attendance}" class="active">
+                Attendance
+            </a>
+
+            <a th:href="@{/student/results}">
+                Results
+            </a>
+
+            <a th:href="@{/student/assignments}">
+                Assignments
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit">Logout</button>
+
+        </form>
+
+    </aside>
+
+
+    <main class="content">
+
+        <h1>My Attendance</h1>
+
+        <p class="subtitle">
+            View your attendance subject-wise
+        </p>
+
+        <section class="attendance-card">
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>Subject Code</th>
+
+                    <th>Subject</th>
+
+                    <th>Attendance</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="a : ${attendance}">
+
+                    <td th:text="${a.subject.code}">
+                        -
+                    </td>
+
+                    <td th:text="${a.subject.name}">
+                        -
+                    </td>
+
+                    <td>
+
+                        <span
+                                class="percentage"
+                                th:text="${a.percentage + '%'}">
+                            0%
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <div
+                    class="no-data"
+                    th:if="${#lists.isEmpty(attendance)}">
+
+                No attendance records available.
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

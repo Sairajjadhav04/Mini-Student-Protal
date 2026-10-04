@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>Student Portal</h2>
+
+        <nav>
+
+            <a th:href="@{/student/dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/student/profile}">
+                Profile
+            </a>
+
+            <a th:href="@{/student/subjects}">
+                Subjects
+            </a>
+
+            <a th:href="@{/student/attendance}">
+                Attendance
+            </a>
+
+            <a th:href="@{/student/results}">
+                Results
+            </a>
+
+            <a th:href="@{/student/assignments}">
+                Assignments
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit">
+                Logout
+            </button>
+
+        </form>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <h1>Student Dashboard</h1>
+
+        <p class="welcome">
+            Welcome,
+            <strong th:text="${student.fullName}">
+                Student
+            </strong>
+        </p>
+
+
+        <!-- Student Information -->
+
+        <section class="student-info">
+
+            <h2>Student Information</h2>
+
+            <div class="info-grid">
+
+                <div>
+                    <span>Name</span>
+                    <strong th:text="${student.fullName}">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Roll Number</span>
+                    <strong th:text="${student.rollNumber}">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Department</span>
+                    <strong th:text="${student.department.name}">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Semester</span>
+                    <strong th:text="${student.semester}">
+                        -
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Subjects -->
+
+        <section class="section">
+
+            <h2>Your Subjects</h2>
+
+            <div class="subject-list">
+
+                <div
+                        class="subject-card"
+                        th:each="subject : ${subjects}">
+
+                    <h3 th:text="${subject.name}">
+                        Subject Name
+                    </h3>
+
+                    <p>
+                        Code:
+                        <span th:text="${subject.code}">
+                            -
+                        </span>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Quick Links -->
+
+        <section class="quick-links">
+
+            <a th:href="@{/student/profile}">
+                Profile
+            </a>
+
+            <a th:href="@{/student/attendance}">
+                Attendance
+            </a>
+
+            <a th:href="@{/student/results}">
+                Results
+            </a>
+
+            <a th:href="@{/student/assignments}">
+                Assignments
+            </a>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

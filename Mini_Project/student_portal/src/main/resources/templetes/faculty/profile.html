@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty Profile</title>
+
+    <link rel="stylesheet" th:href="@{/css/faculty.css}">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <h2>Student Portal</h2>
+
+        <nav>
+
+            <a th:href="@{/faculty/dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/faculty/profile}" class="active">
+                Profile
+            </a>
+
+            <a th:href="@{/faculty/students}">
+                Students
+            </a>
+
+            <a th:href="@{/faculty/attendance}">
+                Attendance
+            </a>
+
+            <a th:href="@{/faculty/marks}">
+                Marks
+            </a>
+
+            <a th:href="@{/faculty/assignments}">
+                Assignments
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit">
+                Logout
+            </button>
+
+        </form>
+
+    </aside>
+
+
+    <main class="content">
+
+        <h1>Faculty Profile</h1>
+
+        <p class="welcome">
+            View your faculty information
+        </p>
+
+
+        <section class="faculty-info">
+
+            <h2>Profile Information</h2>
+
+            <div class="info-grid">
+
+                <div>
+                    <span>Name</span>
+
+                    <strong th:text="${faculty.fullName}">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Username</span>
+
+                    <strong th:text="${faculty.username}">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Email</span>
+
+                    <strong th:text="${faculty.email}">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Department</span>
+
+                    <strong th:text="${faculty.department.name}">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Phone</span>
+
+                    <strong th:text="${faculty.phone}">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Role</span>
+
+                    <strong th:text="${faculty.role}">
+                        -
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

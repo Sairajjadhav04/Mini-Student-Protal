@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile</title>
+
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>Student Portal</h2>
+
+        <nav>
+
+            <a th:href="@{/student/dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/student/profile}" class="active">
+                Profile
+            </a>
+
+            <a th:href="@{/student/subjects}">
+                Subjects
+            </a>
+
+            <a th:href="@{/student/attendance}">
+                Attendance
+            </a>
+
+            <a th:href="@{/student/results}">
+                Results
+            </a>
+
+            <a th:href="@{/student/assignments}">
+                Assignments
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit">
+                Logout
+            </button>
+
+        </form>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <h1>My Profile</h1>
+
+        <p class="subtitle">
+            View and update your personal information
+        </p>
+
+
+        <!-- Success Message -->
+
+        <div th:if="${param.updated}" class="success">
+
+            Profile updated successfully.
+
+        </div>
+
+
+        <!-- Profile Information -->
+
+        <section class="profile-card">
+
+            <h2>Student Information</h2>
+
+
+            <form th:action="@{/student/profile}" method="post">
+
+
+                <!-- Username -->
+
+                <div class="form-group">
+
+                    <label>Username</label>
+
+                    <input
+                            type="text"
+                            th:value="${student.username}"
+                            readonly>
+
+                </div>
+
+
+                <!-- Roll Number -->
+
+                <div class="form-group">
+
+                    <label>Roll Number</label>
+
+                    <input
+                            type="text"
+                            th:value="${student.rollNumber}"
+                            readonly>
+
+                </div>
+
+
+                <!-- Full Name -->
+
+                <div class="form-group">
+
+                    <label>Full Name</label>
+
+                    <input
+                            type="text"
+                            name="fullName"
+                            th:value="${student.fullName}"
+                            required>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label>Email</label>
+
+                    <input
+                            type="email"
+                            name="email"
+                            th:value="${student.email}"
+                            required>
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="form-group">
+
+                    <label>Phone</label>
+
+                    <input
+                            type="text"
+                            name="phone"
+                            th:value="${student.phone}"
+                            required>
+
+                </div>
+
+
+                <!-- Department -->
+
+                <div class="form-group">
+
+                    <label>Department</label>
+
+                    <input
+                            type="text"
+                            th:value="${student.department.name}"
+                            readonly>
+
+                </div>
+
+
+                <!-- Semester -->
+
+                <div class="form-group">
+
+                    <label>Semester</label>
+
+                    <input
+                            type="text"
+                            th:value="${student.semester}"
+                            readonly>
+
+                </div>
+
+
+                <!-- Role -->
+
+                <div class="form-group">
+
+                    <label>Role</label>
+
+                    <input
+                            type="text"
+                            th:value="${student.role}"
+                            readonly>
+
+                </div>
+
+
+                <!-- Button -->
+
+                <button type="submit" class="update-btn">
+
+                    Update Profile
+
+                </button>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

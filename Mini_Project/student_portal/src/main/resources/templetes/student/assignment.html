@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Assignments</title>
+
+    <link rel="stylesheet" th:href="@{/css/assignments.css}">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <h2>Student Portal</h2>
+
+        <nav>
+
+            <a th:href="@{/student/dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/student/profile}">
+                Profile
+            </a>
+
+            <a th:href="@{/student/subjects}">
+                Subjects
+            </a>
+
+            <a th:href="@{/student/attendance}">
+                Attendance
+            </a>
+
+            <a th:href="@{/student/results}">
+                Results
+            </a>
+
+            <a th:href="@{/student/assignments}" class="active">
+                Assignments
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit">
+                Logout
+            </button>
+
+        </form>
+
+    </aside>
+
+
+    <main class="content">
+
+        <h1>My Assignments</h1>
+
+        <p class="subtitle">
+            View assignments for your subjects
+        </p>
+
+
+        <section class="assignment-list">
+
+            <div
+                    class="assignment-card"
+                    th:each="assignment : ${assignments}">
+
+                <h2 th:text="${assignment.title}">
+                    Assignment Title
+                </h2>
+
+                <p class="subject">
+
+                    Subject:
+
+                    <strong th:text="${assignment.subject.name}">
+                        Subject
+                    </strong>
+
+                </p>
+
+                <p
+                        class="description"
+                        th:text="${assignment.description}">
+                    Assignment description
+                </p>
+
+                <p class="due-date">
+
+                    Due Date:
+
+                    <strong th:text="${assignment.dueDate}">
+                        -
+                    </strong>
+
+                </p>
+
+            </div>
+
+
+            <div
+                    class="no-data"
+                    th:if="${#lists.isEmpty(assignments)}">
+
+                No assignments available.
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

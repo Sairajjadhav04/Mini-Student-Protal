@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <h2>Student Portal</h2>
+
+        <nav>
+
+            <a th:href="@{/admin/dashboard}" class="active">
+                Dashboard
+            </a>
+
+            <a th:href="@{/admin/students}">
+                Students
+            </a>
+
+            <a th:href="@{/admin/faculty}">
+                Faculty
+            </a>
+
+            <a th:href="@{/admin/subjects}">
+                Subjects
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit">
+                Logout
+            </button>
+
+        </form>
+
+    </aside>
+
+    <main class="content">
+
+        <h1>Admin Dashboard</h1>
+
+        <p class="welcome">
+            Manage the Student Portal
+        </p>
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <span>Total Students</span>
+
+                <strong th:text="${studentCount}">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span>Total Faculty</span>
+
+                <strong th:text="${facultyCount}">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span>Total Subjects</span>
+
+                <strong th:text="${subjectCount}">
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <h2>Quick Actions</h2>
+
+            <div class="quick-links">
+
+                <a th:href="@{/admin/students}">
+                    Manage Students
+                </a>
+
+                <a th:href="@{/admin/faculty}">
+                    Manage Faculty
+                </a>
+
+                <a th:href="@{/admin/subjects}">
+                    Manage Subjects
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
