@@ -1,0 +1,42 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: student-portal-db
+
+    environment:
+      POSTGRES_DB: student_portal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Sairaj@1420
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d student_portal"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+
+  app:
+    build: .
+    container_name: student-portal-app
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    ports:
+      - "8082:8082"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/student_portal
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Sairaj@1420
+
+volumes:
+  postgres_data:

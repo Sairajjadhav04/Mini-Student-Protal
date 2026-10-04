@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty - Assignments</title>
+
+    <link rel="stylesheet" th:href="@{/css/faculty.css}">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+            <h2>Faculty Portal</h2>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a th:href="@{/faculty/dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/faculty/profile}">
+                Profile
+            </a>
+
+            <a th:href="@{/faculty/students}">
+                Students
+            </a>
+
+            <a th:href="@{/faculty/attendance}">
+                Attendance
+            </a>
+
+            <a th:href="@{/faculty/marks}">
+                Marks
+            </a>
+
+            <a th:href="@{/faculty/assignments}" class="active">
+                Assignments
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="logout-btn">
+                Logout
+            </button>
+        </form>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="top-header">
+            <div>
+                <h1>Assignments</h1>
+
+                <p class="welcome">
+                    Welcome,
+                    <strong th:text="${faculty.fullName}">
+                        Faculty
+                    </strong>
+                </p>
+            </div>
+        </div>
+
+
+        <!-- ADD ASSIGNMENT -->
+        <section class="faculty-info">
+
+            <h2>Add New Assignment</h2>
+
+            <form th:action="@{/faculty/assignments}" method="post">
+
+                <!-- Assignment Title -->
+                <div class="form-group">
+
+                    <label for="title">
+                        Assignment Title
+                    </label>
+
+                    <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Enter assignment title"
+                            required>
+
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-group">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                            id="description"
+                            name="description"
+                            placeholder="Enter assignment description"
+                            required></textarea>
+
+                </div>
+
+
+                <!-- Due Date -->
+                <div class="form-group">
+
+                    <label for="dueDate">
+                        Due Date
+                    </label>
+
+                    <input
+                            type="date"
+                            id="dueDate"
+                            name="dueDate"
+                            required>
+
+                </div>
+
+
+                <!-- Subject -->
+                <div class="form-group">
+
+                    <label for="subjectId">
+                        Subject
+                    </label>
+
+                    <select
+                            id="subjectId"
+                            name="subjectId"
+                            required>
+
+                        <option value="">
+                            Select Subject
+                        </option>
+
+                        <option
+                                th:each="subject : ${subjects}"
+                                th:value="${subject.id}"
+                                th:text="${subject.code + ' - ' + subject.name}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Submit -->
+                <button type="submit" class="primary-btn">
+                    Add Assignment
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- EXISTING ASSIGNMENTS -->
+        <section class="faculty-info">
+
+            <h2>My Assignments</h2>
+
+            <div class="assignment-list">
+
+                <div
+                        class="assignment-card"
+                        th:each="assignment : ${assignments}">
+
+                    <h3
+                            th:text="${assignment.title}">
+                        Assignment Title
+                    </h3>
+
+                    <p class="assignment-subject">
+
+                        Subject:
+
+                        <strong
+                                th:text="${assignment.subject.name}">
+                            Subject
+                        </strong>
+
+                    </p>
+
+                    <p
+                            class="assignment-description"
+                            th:text="${assignment.description}">
+                        Assignment Description
+                    </p>
+
+                    <p class="assignment-due">
+
+                        Due Date:
+
+                        <strong
+                                th:text="${assignment.dueDate}">
+                            -
+                        </strong>
+
+                    </p>
+
+                </div>
+
+
+                <!-- NO ASSIGNMENTS -->
+                <div
+                        class="no-data"
+                        th:if="${#lists.isEmpty(assignments)}">
+
+                    No assignments created yet.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

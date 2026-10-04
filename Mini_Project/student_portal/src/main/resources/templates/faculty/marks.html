@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Marks</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/faculty.css}">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <h2>Student Portal</h2>
+
+        <nav>
+
+            <a th:href="@{/faculty/dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/faculty/profile}">
+                Profile
+            </a>
+
+            <a th:href="@{/faculty/students}">
+                Students
+            </a>
+
+            <a th:href="@{/faculty/attendance}">
+                Attendance
+            </a>
+
+            <a th:href="@{/faculty/marks}"
+               class="active">
+                Marks
+            </a>
+
+            <a th:href="@{/faculty/assignments}">
+                Assignments
+            </a>
+
+        </nav>
+
+        <form th:action="@{/logout}"
+              method="post">
+
+            <button type="submit">
+                Logout
+            </button>
+
+        </form>
+
+    </aside>
+
+
+    <main class="content">
+
+        <h1>Manage Marks</h1>
+
+        <p class="welcome">
+            Enter or update marks for students of your subject.
+        </p>
+
+
+        <!-- SELECT SUBJECT -->
+
+        <section class="faculty-info">
+
+            <h2>Select Subject</h2>
+
+            <form th:action="@{/faculty/marks}"
+                  method="get">
+
+                <select name="subjectId"
+                        required>
+
+                    <option value="">
+                        Select Subject
+                    </option>
+
+                    <option
+                            th:each="subject : ${subjects}"
+                            th:value="${subject.id}"
+                            th:text="${subject.code + ' - ' + subject.name}"
+                            th:selected="${selectedSubject != null and selectedSubject.id == subject.id}">
+                    </option>
+
+                </select>
+
+                <button type="submit">
+                    Load Students
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- MARKS TABLE -->
+
+        <section class="faculty-info"
+                 th:if="${selectedSubject != null}">
+
+            <h2
+                    th:text="${'Marks - ' + selectedSubject.name}">
+                Marks
+            </h2>
+
+
+            <p th:if="${param.saved}"
+               class="success">
+
+                Marks saved successfully.
+
+            </p>
+
+
+            <form th:action="@{/faculty/marks}"
+                  method="post">
+
+                <input type="hidden"
+                       name="subjectId"
+                       th:value="${selectedSubject.id}">
+
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+
+                        <th>Roll Number</th>
+
+                        <th>Marks</th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    <tr th:each="student : ${students}">
+
+                        <td
+                                th:text="${student.fullName}">
+                            Student
+                        </td>
+
+
+                        <td
+                                th:text="${student.rollNumber}">
+                            -
+                        </td>
+
+
+                        <td>
+
+                            <input
+                                    type="number"
+                                    min="0"
+                                    max="100"
+                                    step="0.01"
+                                    required
+
+                                    th:name="${'marks_' + student.id}"
+
+                                    th:value="${marksByStudent.containsKey(student.id) ? marksByStudent.get(student.id).marks : ''}">
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+
+                <button type="submit">
+                    Save Marks
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="faculty-info"
+                 th:if="${selectedSubject == null}">
+
+            <p>
+                No subjects are assigned to you.
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

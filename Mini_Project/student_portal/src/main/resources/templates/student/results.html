@@ -7,9 +7,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Manage Marks</title>
+    <title>Results</title>
 
-    <link rel="stylesheet" th:href="@{/css/faculty.css}">
+    <link rel="stylesheet" th:href="@{/css/result.css}">
 
 </head>
 
@@ -23,27 +23,27 @@
 
         <nav>
 
-            <a th:href="@{/faculty/dashboard}">
+            <a th:href="@{/student/dashboard}">
                 Dashboard
             </a>
 
-            <a th:href="@{/faculty/profile}">
+            <a th:href="@{/student/profile}">
                 Profile
             </a>
 
-            <a th:href="@{/faculty/students}">
-                Students
+            <a th:href="@{/student/subjects}">
+                Subjects
             </a>
 
-            <a th:href="@{/faculty/attendance}">
+            <a th:href="@{/student/attendance}">
                 Attendance
             </a>
 
-            <a th:href="@{/faculty/marks}" class="active">
-                Marks
+            <a th:href="@{/student/results}" class="active">
+                Results
             </a>
 
-            <a th:href="@{/faculty/assignments}">
+            <a th:href="@{/student/assignments}">
                 Assignments
             </a>
 
@@ -62,16 +62,13 @@
 
     <main class="content">
 
-        <h1>Manage Marks</h1>
+        <h1>My Results</h1>
 
-        <p class="welcome">
-            View and manage student marks
+        <p class="subtitle">
+            View your marks subject-wise
         </p>
 
-
-        <section class="faculty-info">
-
-            <h2>Marks Records</h2>
+        <section class="results-card">
 
             <table>
 
@@ -79,9 +76,7 @@
 
                 <tr>
 
-                    <th>Student</th>
-
-                    <th>Roll Number</th>
+                    <th>Subject Code</th>
 
                     <th>Subject</th>
 
@@ -95,11 +90,7 @@
 
                 <tr th:each="m : ${marks}">
 
-                    <td th:text="${m.student.fullName}">
-                        -
-                    </td>
-
-                    <td th:text="${m.student.rollNumber}">
+                    <td th:text="${m.subject.code}">
                         -
                     </td>
 
@@ -107,8 +98,14 @@
                         -
                     </td>
 
-                    <td th:text="${m.marks}">
-                        0
+                    <td>
+
+                        <span
+                                class="marks"
+                                th:text="${m.marks}">
+                            0
+                        </span>
+
                     </td>
 
                 </tr>
@@ -122,7 +119,7 @@
                     class="no-data"
                     th:if="${#lists.isEmpty(marks)}">
 
-                No marks records available.
+                No marks available.
 
             </div>
 

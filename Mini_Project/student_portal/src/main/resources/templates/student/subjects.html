@@ -9,13 +9,17 @@
 
   <title>My Subjects</title>
 
-  <link rel="stylesheet" th:href="@{/css/subjects.css}">
+  <link rel="stylesheet" th:href="@{/css/subject.css}">
 
 </head>
 
 <body>
 
 <div class="layout">
+
+  <!-- =========================
+       SIDEBAR
+       ========================= -->
 
   <aside class="sidebar">
 
@@ -31,7 +35,8 @@
         Profile
       </a>
 
-      <a th:href="@{/student/subjects}" class="active">
+      <a th:href="@{/student/subjects}"
+         class="active">
         Subjects
       </a>
 
@@ -49,6 +54,8 @@
 
     </nav>
 
+    <!-- Logout -->
+
     <form th:action="@{/logout}" method="post">
 
       <button type="submit">
@@ -59,6 +66,11 @@
 
   </aside>
 
+
+  <!-- =========================
+       MAIN CONTENT
+       ========================= -->
+
   <main class="content">
 
     <h1>My Subjects</h1>
@@ -67,17 +79,28 @@
       Subjects assigned to your department and semester
     </p>
 
+
+    <!-- =========================
+         STUDENT INFORMATION
+         ========================= -->
+
     <div class="student-info">
 
       <div>
 
         <span>Department</span>
 
-        <strong th:text="${student.department.name}">
+        <strong
+                th:text="${student.department != null
+                        ? student.department.name
+                        : 'Not Assigned'}">
+
           -
+
         </strong>
 
       </div>
+
 
       <div>
 
@@ -91,11 +114,19 @@
 
     </div>
 
+
+    <!-- =========================
+         SUBJECT SECTION
+         ========================= -->
+
     <section class="subjects-section">
 
       <h2>Subject List</h2>
 
+
       <div class="subject-list">
+
+        <!-- Subject Card -->
 
         <div
                 class="subject-card"
@@ -104,30 +135,52 @@
           <div
                   class="subject-code"
                   th:text="${subject.code}">
+
             CODE
+
           </div>
 
-          <h3 th:text="${subject.name}">
+
+          <h3
+                  th:text="${subject.name}">
+
             Subject Name
+
           </h3>
 
+
           <p>
+
             Semester:
+
             <span th:text="${subject.semester}">
                             -
                         </span>
+
           </p>
 
+
           <p>
+
             Department:
-            <span th:text="${subject.department.name}">
+
+            <span
+                    th:text="${subject.department != null
+                                ? subject.department.name
+                                : 'Not Assigned'}">
+
                             -
+
                         </span>
+
           </p>
 
         </div>
 
       </div>
+
+
+      <!-- No Subjects -->
 
       <div
               class="no-subjects"

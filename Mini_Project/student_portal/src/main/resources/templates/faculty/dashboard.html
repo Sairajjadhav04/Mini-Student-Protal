@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{/css/faculty.css}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+            <h2>Faculty Portal</h2>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/faculty/dashboard" class="active">
+                Dashboard
+            </a>
+
+            <a href="/faculty/students">
+                Students
+            </a>
+
+            <a href="/faculty/attendance">
+                Attendance
+            </a>
+
+            <a href="/faculty/marks">
+                Marks
+            </a>
+
+            <a href="/faculty/assignments">
+                Assignments
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="top-header">
+
+            <div>
+                <h1>Faculty Dashboard</h1>
+
+                <p>
+                    Welcome,
+                    <strong th:text="${faculty.fullName}">
+                        Faculty Name
+                    </strong>
+                </p>
+            </div>
+
+        </header>
+
+
+        <!-- FACULTY INFORMATION -->
+        <section class="dashboard-section">
+
+            <h2>Faculty Information</h2>
+
+            <div class="info-card">
+
+                <div class="info-item">
+                    <span class="label">Name</span>
+                    <span class="value"
+                          th:text="${faculty.fullName}">
+                        Faculty Name
+                    </span>
+                </div>
+
+                <div class="info-item">
+                    <span class="label">Username</span>
+                    <span class="value"
+                          th:text="${faculty.username}">
+                        username
+                    </span>
+                </div>
+
+                <div class="info-item">
+                    <span class="label">Email</span>
+                    <span class="value"
+                          th:text="${faculty.email}">
+                        email
+                    </span>
+                </div>
+
+                <div class="info-item">
+                    <span class="label">Phone</span>
+                    <span class="value"
+                          th:text="${faculty.phone}">
+                        phone
+                    </span>
+                </div>
+
+                <div class="info-item">
+                    <span class="label">Department</span>
+                    <span class="value"
+                          th:text="${faculty.department != null ? faculty.department.name : 'Not Assigned'}">
+                        Department
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUBJECTS -->
+        <section class="dashboard-section">
+
+            <h2>My Subjects</h2>
+
+            <div class="subject-grid">
+
+                <div class="subject-card"
+                     th:each="subject : ${subjects}">
+
+                    <h3 th:text="${subject.name}">
+                        Subject Name
+                    </h3>
+
+                    <p>
+                        Semester:
+                        <span th:text="${subject.semester}">
+                            3
+                        </span>
+                    </p>
+
+                    <p>
+                        Department:
+                        <span th:text="${subject.department != null ? subject.department.name : 'Not Assigned'}">
+                            Department
+                        </span>
+                    </p>
+
+                </div>
+
+                <div th:if="${#lists.isEmpty(subjects)}"
+                     class="empty-message">
+
+                    <p>No subjects assigned to you.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+        <section class="dashboard-section">
+
+            <h2>Quick Actions</h2>
+
+            <div class="action-grid">
+
+                <a href="/faculty/students"
+                   class="action-card">
+
+                    <h3>Students</h3>
+
+                    <p>
+                        View students assigned to your subjects.
+                    </p>
+
+                </a>
+
+
+                <a href="/faculty/attendance"
+                   class="action-card">
+
+                    <h3>Attendance</h3>
+
+                    <p>
+                        Mark and manage student attendance.
+                    </p>
+
+                </a>
+
+
+                <a href="/faculty/marks"
+                   class="action-card">
+
+                    <h3>Marks</h3>
+
+                    <p>
+                        Enter and manage student marks.
+                    </p>
+
+                </a>
+
+
+                <a href="/faculty/assignments"
+                   class="action-card">
+
+                    <h3>Assignments</h3>
+
+                    <p>
+                        Create and manage assignments.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

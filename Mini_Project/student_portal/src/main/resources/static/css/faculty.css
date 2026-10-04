@@ -1,8 +1,17 @@
+/* =========================
+   RESET
+   ========================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+
+/* =========================
+   BODY
+   ========================= */
 
 body {
     font-family: Arial, sans-serif;
@@ -10,71 +19,101 @@ body {
     color: #1e293b;
 }
 
+
+/* =========================
+   MAIN LAYOUT
+   ========================= */
+
+.dashboard-container,
 .layout {
     display: flex;
     min-height: 100vh;
 }
 
 
-/* Sidebar */
+/* =========================
+   SIDEBAR
+   ========================= */
 
 .sidebar {
     width: 230px;
-
+    min-height: 100vh;
     background: #1e293b;
-
     padding: 25px 15px;
-
     color: white;
+    flex-shrink: 0;
 }
 
-.sidebar h2 {
-    text-align: center;
 
+/* Dashboard sidebar */
+
+.sidebar-header {
+    text-align: center;
     margin-bottom: 30px;
 }
 
+.sidebar-header h2 {
+    font-size: 22px;
+    color: white;
+}
+
+
+/* Other faculty pages */
+
+.sidebar > h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 22px;
+    color: white;
+}
+
+
+/* =========================
+   SIDEBAR NAVIGATION
+   ========================= */
+
+.sidebar-nav,
 .sidebar nav {
     display: flex;
-
     flex-direction: column;
 }
 
+.sidebar-nav a,
 .sidebar nav a {
     color: #cbd5e1;
-
     text-decoration: none;
-
     padding: 12px 15px;
-
     margin-bottom: 5px;
-
     border-radius: 5px;
+    transition: 0.2s;
 }
 
+.sidebar-nav a:hover,
+.sidebar-nav a.active,
 .sidebar nav a:hover,
 .sidebar nav a.active {
     background: #2563eb;
-
     color: white;
+}
+
+
+/* =========================
+   LOGOUT BUTTON
+   ========================= */
+
+.sidebar form {
+    margin-top: 25px;
 }
 
 .sidebar button {
     width: 100%;
-
-    margin-top: 30px;
-
     padding: 11px;
-
     border: none;
-
     border-radius: 5px;
-
     background: #dc2626;
-
     color: white;
-
     cursor: pointer;
+    font-size: 14px;
 }
 
 .sidebar button:hover {
@@ -82,136 +121,771 @@ body {
 }
 
 
-/* Main Content */
+/* =========================
+   MAIN CONTENT
+   ========================= */
 
+.main-content,
 .content {
     flex: 1;
-
     padding: 35px;
-}
-
-.content h1 {
-    margin-bottom: 8px;
-}
-
-.welcome {
-    color: #64748b;
-
-    margin-bottom: 25px;
+    overflow-x: auto;
 }
 
 
-/* Faculty Information */
+/* =========================
+   PAGE HEADER
+   ========================= */
 
-.faculty-info {
-    background: white;
-
-    padding: 25px;
-
-    border-radius: 8px;
-
+.top-header {
     margin-bottom: 30px;
 }
 
-.faculty-info h2 {
-    margin-bottom: 20px;
+.top-header h1,
+.content h1 {
+    margin-bottom: 8px;
+    font-size: 30px;
 }
 
-.info-grid {
+.top-header p,
+.welcome {
+    color: #64748b;
+    font-size: 16px;
+}
+
+.top-header strong {
+    color: #2563eb;
+}
+
+
+/* =========================
+   DASHBOARD SECTIONS
+   ========================= */
+
+.dashboard-section {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.dashboard-section h2,
+.faculty-info h2 {
+    margin-bottom: 20px;
+    font-size: 21px;
+}
+
+
+/* =========================
+   FACULTY INFORMATION
+   ========================= */
+
+.faculty-info {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================
+   DASHBOARD INFO CARD
+   ========================= */
+
+.info-card {
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
-
     gap: 15px;
 }
 
-.info-grid div {
+.info-item {
     background: #f8fafc;
-
     padding: 15px;
-
     border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.info-item .label {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.info-item .value {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+    word-break: break-word;
+}
+
+
+/* =========================
+   PROFILE INFO GRID
+   ========================= */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.info-grid > div {
+    background: #f8fafc;
+    padding: 18px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
 }
 
 .info-grid span {
     display: block;
-
     color: #64748b;
-
     font-size: 13px;
+    margin-bottom: 7px;
+}
 
-    margin-bottom: 6px;
+.info-grid strong {
+    display: block;
+    color: #1e293b;
+    font-size: 15px;
+    word-break: break-word;
 }
 
 
-/* Modules */
+/* =========================
+   SUBJECTS
+   ========================= */
 
-.section {
-    margin-bottom: 30px;
-}
-
-.section h2 {
-    margin-bottom: 15px;
-}
-
-.quick-links {
+.subject-grid {
     display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
-.quick-links a {
-    background: #2563eb;
-
-    color: white;
-
-    text-align: center;
-
-    padding: 15px;
-
-    border-radius: 5px;
-
-    text-decoration: none;
+.subject-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
 }
 
-.quick-links a:hover {
+.subject-card h3 {
+    color: #2563eb;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.subject-card p {
+    color: #64748b;
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.subject-card span {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+
+/* =========================
+   FORMS
+   ========================= */
+
+.faculty-info form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+select,
+input[type="number"] {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    background: white;
+    font-size: 14px;
+    color: #1e293b;
+}
+
+select {
+    min-width: 250px;
+}
+
+input[type="number"] {
+    width: 120px;
+}
+
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.content button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.content button:hover {
     background: #1d4ed8;
 }
 
 
-/* Responsive */
+/* =========================
+   TABLE
+   ========================= */
 
-@media (max-width: 900px) {
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    padding: 14px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background: #f8fafc;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+td {
+    font-size: 14px;
+    color: #475569;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* =========================
+   RADIO BUTTONS
+   ========================= */
+
+td label {
+    margin-right: 15px;
+    color: #475569;
+    font-size: 14px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+
+/* =========================
+   SUCCESS MESSAGE
+   ========================= */
+
+.success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+
+/* =========================
+   EMPTY / NO DATA
+   ========================= */
+
+.empty-message,
+.no-data {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    color: #64748b;
+}
+
+
+/* =========================
+   QUICK ACTIONS
+   ========================= */
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.action-card {
+    display: block;
+    background: #2563eb;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.action-card:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.action-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.action-card p {
+    color: #dbeafe;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1100px) {
+
+    .info-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     .info-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .quick-links {
+    .subject-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .action-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-@media (max-width: 600px) {
 
+@media (max-width: 700px) {
+
+    .dashboard-container,
     .layout {
         flex-direction: column;
     }
 
     .sidebar {
         width: 100%;
+        min-height: auto;
     }
 
+    .sidebar-nav,
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .sidebar-nav a,
+    .sidebar nav a {
+        margin-bottom: 0;
+    }
+
+    .sidebar form {
+        margin-top: 15px;
+    }
+
+    .main-content,
     .content {
         padding: 20px;
     }
 
+    .info-card,
     .info-grid,
-    .quick-links {
+    .subject-grid,
+    .action-grid {
         grid-template-columns: 1fr;
+    }
+
+    .faculty-info {
+        padding: 18px;
+    }
+
+    table {
+        min-width: 650px;
+    }
+
+    .faculty-info {
+        overflow-x: auto;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .content h1,
+    .top-header h1 {
+        font-size: 25px;
+    }
+
+    .sidebar-nav,
+    .sidebar nav {
+        flex-direction: column;
+    }
+
+    select {
+        width: 100%;
+        min-width: 0;
+    }
+}
+/* =========================
+   ASSIGNMENTS
+   ========================= */
+
+.assignment-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.assignment-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #2563eb;
+    transition: 0.2s;
+}
+
+.assignment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.assignment-card h3 {
+    color: #1e293b;
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.assignment-subject {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.assignment-subject strong {
+    color: #2563eb;
+}
+
+.assignment-description {
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.assignment-due {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.assignment-due strong {
+    color: #dc2626;
+}
+
+
+/* =========================
+   ASSIGNMENT FORM
+   ========================= */
+
+.faculty-info textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.faculty-info input[type="text"],
+.faculty-info input[type="date"] {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #1e293b;
+}
+
+.faculty-info form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
+.faculty-info form select {
+    width: 100%;
+}
+
+.faculty-info form button {
+    align-self: flex-start;
+}
+
+
+/* =========================
+   ASSIGNMENT RESPONSIVE
+   ========================= */
+
+@media (max-width: 800px) {
+
+    .assignment-list {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================
+   FACULTY ASSIGNMENT PAGE
+   ========================================= */
+
+
+/* Assignment sections */
+
+.faculty-info {
+    background: #ffffff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.faculty-info h2 {
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+
+/* Assignment Form */
+
+.faculty-info form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* Form Group */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #334155;
+}
+
+
+/* Inputs */
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 11px 12px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+
+    font-size: 14px;
+    box-sizing: border-box;
+
+    background: #ffffff;
+}
+
+
+/* Textarea */
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+
+/* Focus */
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+
+/* Add Assignment Button */
+
+.primary-btn {
+    width: fit-content;
+
+    padding: 11px 22px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* Assignment List */
+
+.assignment-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+/* Assignment Card */
+
+.assignment-card {
+    background: #f8fafc;
+
+    padding: 20px;
+
+    border-radius: 8px;
+
+    border: 1px solid #e2e8f0;
+
+    border-left: 4px solid #2563eb;
+
+    transition: 0.2s;
+}
+
+.assignment-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Assignment Title */
+
+.assignment-card h3 {
+    margin: 0 0 10px 0;
+
+    color: #1e293b;
+
+    font-size: 18px;
+}
+
+
+/* Subject */
+
+.assignment-subject {
+    margin-bottom: 10px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.assignment-subject strong {
+    color: #2563eb;
+}
+
+
+/* Description */
+
+.assignment-description {
+    color: #475569;
+
+    line-height: 1.6;
+
+    margin-bottom: 15px;
+}
+
+
+/* Due Date */
+
+.assignment-due {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.assignment-due strong {
+    color: #dc2626;
+}
+
+
+/* No Assignment */
+
+.no-data {
+    padding: 20px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    background: #f8fafc;
+
+    border-radius: 8px;
+
+    border: 1px solid #e2e8f0;
+}
+
+
+/* Responsive */
+
+@media (max-width: 800px) {
+
+    .assignment-list {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .faculty-info {
+        padding: 18px;
+    }
+
+    .primary-btn {
+        width: 100%;
     }
 
 }
